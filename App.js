@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Button, StyleSheet, Text, View, TextInput } from "react-native";
+import { Button, StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
 
 export default function App() {
   const [inputText, setInputText] = useState("");
@@ -11,8 +11,8 @@ export default function App() {
   }
 
   function addGoalHandler(addedGoal) {
+    if (addedGoal === "") return;
     console.log(addedGoal);
-    if (addedGoal.length < 1) return;
     setToDos([...toDos, addedGoal]);
     setInputText("");
   }
@@ -28,17 +28,17 @@ export default function App() {
           title="ADD"
         />
       </View>
-      <View>
-        <Text style={styles.displayText}>
-          {toDos.map((todo, index) => {
-            return (
-              <View key={index} style={styles.list}>
-                <Text>{todo}</Text>
-              </View>
-            );
-          })}
-        </Text>
-      </View>
+      <ScrollView>
+        {toDos.map((todo, index) => {
+          return (
+            <View key={index} style={styles.list}>
+              <Text>{todo}</Text>
+            </View>
+          );
+        })}
+      </ScrollView>
+
+      <StatusBar />
     </View>
   );
 }
