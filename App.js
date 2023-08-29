@@ -12,6 +12,7 @@ export default function App() {
 
   function addGoalHandler(addedGoal) {
     console.log(addedGoal);
+    if (addedGoal.length < 1) return;
     setToDos([...toDos, addedGoal]);
     setInputText("");
   }
@@ -19,7 +20,7 @@ export default function App() {
   return (
     <View style={styles.screen}>
       <View style={styles.inputWrapper}>
-        <TextInput placeholder="test" style={styles.input} onChangeText={handleInput}></TextInput>
+        <TextInput placeholder="test" style={styles.input} onChangeText={handleInput} />
         <Button
           onPress={() => {
             addGoalHandler(inputText);
@@ -29,8 +30,12 @@ export default function App() {
       </View>
       <View>
         <Text style={styles.displayText}>
-          {toDos.map((todo) => {
-            return <Text>{todo}</Text>;
+          {toDos.map((todo, index) => {
+            return (
+              <View key={index} style={styles.list}>
+                <Text>{todo}</Text>
+              </View>
+            );
           })}
         </Text>
       </View>
@@ -58,5 +63,12 @@ const styles = StyleSheet.create({
   displayText: {
     marginTop: 20,
     fontSize: 20,
+  },
+  list: {
+    padding: 10,
+    marginVertical: 10,
+    backgroundColor: "#ccc",
+    borderColor: "black",
+    borderWidth: 1,
   },
 });
