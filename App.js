@@ -3,28 +3,60 @@ import { useState } from "react";
 import { Button, StyleSheet, Text, View, TextInput } from "react-native";
 
 export default function App() {
+  const [inputText, setInputText] = useState("");
+  const [toDos, setToDos] = useState([]);
+
+  function handleInput(enteredText) {
+    setInputText(enteredText);
+  }
+
+  function addGoalHandler(addedGoal) {
+    console.log(addedGoal);
+    setToDos([...toDos, addedGoal]);
+    setInputText("");
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
+      <View style={styles.inputWrapper}>
+        <TextInput placeholder="test" style={styles.input} onChangeText={handleInput}></TextInput>
+        <Button
+          onPress={() => {
+            addGoalHandler(inputText);
+          }}
+          title="ADD"
+        />
+      </View>
       <View>
-        <TextInput placeholder="test" style={styles.input}></TextInput>
-        <Button style={styles.button} title="ADD" />
+        <Text style={styles.displayText}>
+          {toDos.map((todo) => {
+            return <Text>{todo}</Text>;
+          })}
+        </Text>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     padding: 50,
+  },
+  inputWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   input: {
     height: 45,
-    fontSize: 25,
     borderWidth: 1,
     padding: 10,
+    width: 200,
+    borderRadius: 5,
+    fontSize: 25,
   },
-  button: {
-    borderWidth: 1,
-    backgroundColor: "blue",
+  displayText: {
+    marginTop: 20,
+    fontSize: 20,
   },
 });
