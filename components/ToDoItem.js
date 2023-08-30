@@ -1,10 +1,10 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 
-function ToDoItem({ value }) {
+function ToDoItem({ item, onDelete }) {
   return (
     <View style={styles.list}>
-      <Text>{value}</Text>
+      <Text onPress={() => onDelete(item.uid)}>{item.value}</Text>
     </View>
   );
 }

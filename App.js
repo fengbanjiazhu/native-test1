@@ -13,13 +13,18 @@ export default function App() {
     setToDos([...toDos, { uid: Math.random().toString(), value: addedGoal }]);
   }
 
+  function removeTodoHandler(uid) {
+    const newToDos = toDos.filter((todo) => todo.uid !== uid);
+    setToDos([...newToDos]);
+  }
+
   return (
     <View style={styles.screen}>
       <ToDoInput handlePress={addGoalHandler} />
       <FlatList
         keyExtractor={(item, index) => item.uid}
         data={toDos}
-        renderItem={(itemData) => <ToDoItem value={itemData.item.value} />}
+        renderItem={(itemData) => <ToDoItem item={itemData.item} onDelete={removeTodoHandler} />}
       ></FlatList>
 
       <StatusBar />
