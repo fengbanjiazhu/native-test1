@@ -2,39 +2,24 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Button, StyleSheet, Text, View, TextInput, ScrollView, FlatList } from "react-native";
 
-export default function App() {
-  const [inputText, setInputText] = useState("");
-  const [toDos, setToDos] = useState([]);
+import ToDoItem from "./components/ToDoItem";
+import ToDoInput from "./components/ToDoInput";
 
-  function handleInput(enteredText) {
-    setInputText(enteredText);
-  }
+export default function App() {
+  const [toDos, setToDos] = useState([]);
 
   function addGoalHandler(addedGoal) {
     if (addedGoal === "") return;
     setToDos([...toDos, { uid: Math.random().toString(), value: addedGoal }]);
-    setInputText("");
   }
 
   return (
     <View style={styles.screen}>
-      <View style={styles.inputWrapper}>
-        <TextInput placeholder="test" style={styles.input} onChangeText={handleInput} />
-        <Button
-          onPress={() => {
-            addGoalHandler(inputText);
-          }}
-          title="ADD"
-        />
-      </View>
+      <ToDoInput handlePress={addGoalHandler} />
       <FlatList
         keyExtractor={(item, index) => item.uid}
         data={toDos}
-        renderItem={(itemData) => (
-          <View style={styles.list}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
+        renderItem={(itemData) => <ToDoItem value={itemData.item.value} />}
       ></FlatList>
 
       {/* <ScrollView>
