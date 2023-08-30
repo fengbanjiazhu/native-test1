@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Button, StyleSheet, Text, View, TextInput, ScrollView, FlatList } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 
 import ToDoItem from "./components/ToDoItem";
 import ToDoInput from "./components/ToDoInput";
@@ -21,16 +21,6 @@ export default function App() {
         data={toDos}
         renderItem={(itemData) => <ToDoItem value={itemData.item.value} />}
       ></FlatList>
-
-      {/* <ScrollView>
-        {toDos.map((todo, index) => {
-          return (
-            <View key={index} style={styles.list}>
-              <Text>{todo}</Text>
-            </View>
-          );
-        })}
-      </ScrollView> */}
 
       <StatusBar />
     </View>
