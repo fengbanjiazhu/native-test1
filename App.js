@@ -12,6 +12,7 @@ export default function App() {
   function addGoalHandler(addedGoal) {
     if (addedGoal === "") return;
     setToDos([...toDos, { uid: Math.random().toString(), value: addedGoal }]);
+    setShowModal(false);
   }
 
   function removeTodoHandler(uid) {
@@ -19,13 +20,14 @@ export default function App() {
     setToDos([...newToDos]);
   }
 
-  function toggleModal() {
-    setShowModal(!showModal);
-  }
-
   return (
     <View style={styles.screen}>
-      <Button onPress={toggleModal} title="Add new todo" />
+      <Button
+        onPress={() => {
+          setShowModal(true);
+        }}
+        title="Add new todo"
+      />
       <ToDoInput show={showModal} handlePress={addGoalHandler} />
       <FlatList
         keyExtractor={(item, index) => item.uid}

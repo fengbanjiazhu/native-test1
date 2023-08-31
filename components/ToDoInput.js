@@ -20,9 +20,9 @@ function ToDoInput({ handlePress, show }) {
 
 const styles = StyleSheet.create({
   inputWrapper: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
+    flex: 1,
   },
   input: {
     height: 45,
