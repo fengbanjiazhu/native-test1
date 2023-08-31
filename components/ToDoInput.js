@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button, StyleSheet, View, TextInput, Text } from "react-native";
+import { Button, StyleSheet, View, TextInput, Text, Modal } from "react-native";
 
-function ToDoInput({ handlePress }) {
+function ToDoInput({ handlePress, show }) {
   const [inputText, setInputText] = useState("");
 
   function handleInput(enteredText) {
@@ -9,10 +9,12 @@ function ToDoInput({ handlePress }) {
   }
 
   return (
-    <View style={styles.inputWrapper}>
-      <TextInput placeholder="test" style={styles.input} onChangeText={handleInput} />
-      <Button onPress={() => handlePress(inputText)} title="ADD" />
-    </View>
+    <Modal visible={show} animationType="slide">
+      <View style={styles.inputWrapper}>
+        <TextInput placeholder="test" style={styles.input} onChangeText={handleInput} />
+        <Button onPress={() => handlePress(inputText)} title="ADD" />
+      </View>
+    </Modal>
   );
 }
 

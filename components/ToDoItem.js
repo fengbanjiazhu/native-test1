@@ -3,20 +3,20 @@ import { Text, View, StyleSheet, TouchableOpacity, TouchableHighlight } from "re
 
 function ToDoItem({ item, onDelete }) {
   return (
-    <TouchableHighlight underlayColor="#FF4D4F" onPress={() => onDelete(item.uid)}>
+    <TouchableOpacity activeOpacity={0.8} onPress={() => onDelete(item.uid)}>
       <View style={styles.list}>
         <Text>{item.value}</Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 
 {
-  /* <TouchableOpacity activeOpacity={0.8} onPress={() => onDelete(item.uid)}>
-      <View style={styles.list}>
-        <Text>{item.value}</Text>
-      </View>
-    </TouchableOpacity> */
+  /* <TouchableHighlight underlayColor="#FF4D4F" onPress={() => onDelete(item.uid)}>
+<View style={styles.list}>
+  <Text>{item.value}</Text>
+</View>
+</TouchableHighlight> */
 }
 
 const styles = StyleSheet.create({

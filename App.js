@@ -1,12 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Button } from "react-native";
 
 import ToDoItem from "./components/ToDoItem";
 import ToDoInput from "./components/ToDoInput";
 
 export default function App() {
   const [toDos, setToDos] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   function addGoalHandler(addedGoal) {
     if (addedGoal === "") return;
@@ -18,9 +19,14 @@ export default function App() {
     setToDos([...newToDos]);
   }
 
+  function toggleModal() {
+    setShowModal(!showModal);
+  }
+
   return (
     <View style={styles.screen}>
-      <ToDoInput handlePress={addGoalHandler} />
+      <Button onPress={toggleModal} title="Add new todo" />
+      <ToDoInput show={showModal} handlePress={addGoalHandler} />
       <FlatList
         keyExtractor={(item, index) => item.uid}
         data={toDos}
