@@ -15,6 +15,10 @@ export default function App() {
     setShowModal(false);
   }
 
+  function handleCloseModal() {
+    setShowModal(false);
+  }
+
   function removeTodoHandler(uid) {
     const newToDos = toDos.filter((todo) => todo.uid !== uid);
     setToDos([...newToDos]);
@@ -28,7 +32,7 @@ export default function App() {
         }}
         title="Add new todo"
       />
-      <ToDoInput show={showModal} handlePress={addGoalHandler} />
+      <ToDoInput show={showModal} handleCancel={handleCloseModal} handlePress={addGoalHandler} />
       <FlatList
         keyExtractor={(item, index) => item.uid}
         data={toDos}
